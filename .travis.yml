@@ -1,0 +1,4 @@
+# https://travis-ci.org/sattila83/Robocar
+language: python
+python:
+    - 2.7
