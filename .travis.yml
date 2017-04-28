@@ -1,5 +1,11 @@
 # https://travis-ci.org/sattila83/Robocar
 language: python
 python:
-    - 2.7
-script: pytest
+  - 2.7
+install:
+  - pip install pytest coverage codecov
+script:
+  - pytest
+after_success:
+  - coverage combine
+  - codecov
