@@ -5,7 +5,7 @@ python:
 install:
   - pip install pytest coverage codecov
 script:
-  - py.test
+  - py.test --cov=./
 after_success:
   - coverage combine
   - codecov
