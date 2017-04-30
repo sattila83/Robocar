@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#import Position from position
+from position import Position
 
 class Motor:
 	def bypass(self):

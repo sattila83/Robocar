@@ -3,7 +3,7 @@
 #import gps
 #import motor
 #import path
-#import position
+from position import Position
 
 class Robocar:
 	# constants need to be refined according to experience
