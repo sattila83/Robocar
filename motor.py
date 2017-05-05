@@ -4,7 +4,7 @@ from pwmobject import PWMObject
 from random import randint
 
 class MotorFunctions:
-	def dodge(self):
+	def dodge():
 		print("Bypassing obstacle")
 		drive = PWMObject(21) # port 21 for driving
 		turn = PWMObject(20) # port 20 for turning
@@ -22,25 +22,25 @@ class MotorFunctions:
 		drive.cleanup()
 		turn.cleanup()
 
-	def moveForward(self):
+	def moveForward():
 		print("Moving forward")
 		drive = PWMObject(21) # port 21 for driving
 		drive.toPositive()
 		drive.cleanup()
 
-	def moveBackward(self):
+	def moveBackward():
 		print("Moving forward")
 		drive = PWMObject(21) # port 21 for driving
 		drive.toNegative()
 		drive.cleanup()
 
-	def turnLeft(self):
+	def turnLeft():
 		print("Turning left")
 		turn = PWMObject(20) # port 20 for turning
 		turn.toPositive()
 		turn.cleanup()
 
-	def turnRight(self):
+	def turnRight():
 		print("Turning right")
 		turn = PWMObject(20) # port 20 for turning
 		turn.toNegative()
