@@ -33,5 +33,7 @@ class PWMObject:
 			time.sleep(SECONDS)
 		self.pwm.ChangeDutyCycle(7.5)
 		self.pwm.stop()
-	def cleanup(self):
+
+	def cleanup():
 		GPIO.cleanup()
+

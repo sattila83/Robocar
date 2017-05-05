@@ -28,8 +28,8 @@ class MotorFunctions:
 		drive.toPositive()
 		drive.cleanup()
 
-	def moveBackward():
-		print("Moving forward")
+	def moveBackward(self):
+		print("Moving backward")
 		drive = PWMObject(21) # port 21 for driving
 		drive.toNegative()
 		drive.cleanup()
