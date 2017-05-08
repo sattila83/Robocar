@@ -31,9 +31,9 @@ class TestMotorFunctions:
 		
 		# then
 		pwmObjectMock.assert_called_with(21)
-		pwmInstance.toPositive.assert_called_once()
-		pwmInstance.toNegative.assert_not_called()
-		pwmInstance.cleanup.assert_called_once()
+		assert 1 == pwmInstance.toPositive.call_count
+		assert 0 == pwmInstance.toNegative.call_count
+		assert 1 == pwmInstance.cleanup.call_count
 
 	@mock.patch('motor.PWMObject', autospec=True)
 	def test_moveBackward(self, pwmObjectMock):
@@ -45,9 +45,9 @@ class TestMotorFunctions:
 		
 		# then
 		pwmObjectMock.assert_called_with(21)
-		pwmInstance.toPositive.assert_not_called()
-		pwmInstance.toNegative.assert_called_once()
-		pwmInstance.cleanup.assert_called_once()
+		assert 0 == pwmInstance.toPositive.call_count
+		assert 1 == pwmInstance.toNegative.call_count
+		assert 1 == pwmInstance.cleanup.call_count
 
 	@mock.patch('motor.PWMObject', autospec=True)
 	def test_turnLeft(self, pwmObjectMock):
@@ -59,9 +59,9 @@ class TestMotorFunctions:
 		
 		# then
 		pwmObjectMock.assert_called_with(20)
-		pwmInstance.toPositive.assert_called_once()
-		pwmInstance.toNegative.assert_not_called()
-		pwmInstance.cleanup.assert_called_once()
+		assert 1 == pwmInstance.toPositive.call_count
+		assert 0 == pwmInstance.toNegative.call_count
+		assert 1 == pwmInstance.cleanup.call_count
 
 	@mock.patch('motor.PWMObject', autospec=True)
 	def test_turnRight(self, pwmObjectMock):
@@ -73,6 +73,6 @@ class TestMotorFunctions:
 		
 		# then
 		pwmObjectMock.assert_called_with(20)
-		pwmInstance.toPositive.assert_not_called()
-		pwmInstance.toNegative.assert_called_once()
-		pwmInstance.cleanup.assert_called_once()
+		assert 0 == pwmInstance.toPositive.call_count
+		assert 1 == pwmInstance.toNegative.call_count
+		assert 1 == pwmInstance.cleanup.call_count
