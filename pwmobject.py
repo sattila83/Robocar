@@ -9,8 +9,8 @@ class PWMObject:
 	def __init__(self, port):
 		self.port = port
 		GPIO.setmode(GPIO.BCM)
-		GPIO.setup(port, GPIO.OUT)
-		self.pwm = GPIO.PWM(self.port,50) # 50 Hz (20 ms) - it would be nice to have it as a parameter
+		GPIO.setup(self.port, GPIO.OUT)
+		self.pwm = GPIO.PWM(self.port, 50) # 50 Hz (20 ms) - it would be nice to have it as a parameter
 
 	def toPositive(self):
 		self.pwm.start(7.5)
