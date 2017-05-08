@@ -17,7 +17,7 @@ class Robocar:
 	def __init__(self, positions = []):
 		self.basePositions = positions
 	
-	def main(self):
+	def start(self):
 		print("Starting route")
 		
 		actualPosition = PositioningService.getActualPosition()
@@ -32,10 +32,10 @@ class Robocar:
 			if (actualPosition.distanceTo(previousPosition) < MINIMUM_DISTANCE_TO_OTHER_COORD):
 				MotorFunctions.dodge() # random dodge, as the robot doesn't know its environment
 				continue
-		 
-			closestVisitable = route.getCurrentGoal() # nem kell mindig kiszámolni, elég ha egy lista k. elemét adjuk mindig vissza
+			
+			closestVisitable = route.getCurrentGoal()
 			distanceToGoal = actualPosition.distanceTo(closestVisitable)
-
+			
 			if distanceToGoal < MINIMUM_DISTANCE_TO_OTHER_COORD: # actual goal is reached
 				route.markCurrentGoalVisited()
 			
