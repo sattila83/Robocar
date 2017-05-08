@@ -11,11 +11,14 @@ class Route:
         min_idx = np.argmin(distances)
         
         self.ordered_coordinates = route_coordinates[min_idx:] + route_coordinates[0:min_idx]
+		self.ordered_coordinates.append(actual_position)
         None
-        
+
     def getCurrentGoal(self):
         return self.ordered_coordinates[0]
-    
+
     def markCurrentGoalVisited(self):
         self.ordered_coordinates = self.ordered_coordinates[1:]
-        
+
+	def done(self):
+        return 0 == len(self.ordered_coordinates)
