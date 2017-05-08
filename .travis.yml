@@ -3,7 +3,7 @@ language: python
 python:
   - 2.7
 install:
-  - pip install pytest pytest-cov coverage codecov
+  - pip install pytest mock pytest-cov coverage codecov
 script:
   - py.test --cov=./
 after_success:
