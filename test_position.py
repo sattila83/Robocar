@@ -32,6 +32,17 @@ class TestPosition:
 		# then
 		assert "(0.021547,0.133593)" == s
 
+	def test_toDecimal(self):
+		# given
+		directions = [["N", 1], ["S", -1], ["E", 1], ["W", -1]]
+		
+		for direction in directions:
+			# when
+			actualDecimal = Position.toDecimal("00114.07402", direction[0])
+		
+			# then
+			assert direction[1] * 1.234567 == actualDecimal
+
 	def test_distanceTo(self):
 		#given
 		budapest = Position(47.49791, 19.04023)
