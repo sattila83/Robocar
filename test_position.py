@@ -12,6 +12,39 @@ class TestPosition:
 		assert 0.021547258986468833 == p.lat
 		assert 0.1335931034545449 == p.lon
 
+	def test_cmp_equals(self):
+		# given
+		p1 = Position(1.0, 1.0)
+		p2 = Position(1.0, 1.0)
+		
+		# when
+		cmp = p1 == p2
+		
+		# then
+		assert True == cmp
+
+	def test_cmp_greater(self):
+		# given
+		p1 = Position(1.0, 1.0)
+		p2 = Position(0.0, 1.0)
+		
+		# when
+		cmp = p1 > p2
+		
+		# then
+		assert True == cmp
+
+	def test_cmp_less(self):
+		# given
+		p1 = Position(1.0, 1.0)
+		p2 = Position(2.0, 1.0)
+		
+		# when
+		cmp = p1 < p2
+		
+		# then
+		assert True == cmp
+
 	def test_str(self):
 		# given
 		p = Position(1.234567, 7.654321)

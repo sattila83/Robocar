@@ -9,6 +9,14 @@ class Position:
 		self.lat = math.radians(float(lat))
 		self.lon = math.radians(float(lon))
 
+	def __cmp__(self, other):
+		if 0.0 == self.distanceTo(other):
+			return 0
+		elif self.bearingTo(other) < other.bearingTo(self):
+			return -1
+		else:
+			return 1
+
 	def __repr__(self):
 		return "(%(lat)f,%(lon)f)" % { 'lat': self.lat, 'lon': self.lon }
 
