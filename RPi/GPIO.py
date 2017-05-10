@@ -10,14 +10,17 @@ IN = "INPUT"
 OUT = "OUTPUT"
 
 def setmode(mode):
-	print("GPIO setmode() - pin mode: %s" % mode)
+	#print("GPIO setmode() - pin mode: %s" % mode)
+	None
 
 def setup(port, mode):
-	print("GPIO setup() - port: %s, io mode: %s" % (port, mode))
+	#print("GPIO setup() - port: %s, io mode: %s" % (port, mode))
+	None
 
 def PWM(port, frequency):
-	print("GPIO PWM() - port: %s, frequency: %s Hz" %  (port, frequency))
+	#print("GPIO PWM() - port: %s, frequency: %s Hz" %  (port, frequency))
 	return DummyPWM()
 
 def cleanup():
-	print("GPIO cleaning up")
+	#print("GPIO cleaning up")
+	None
