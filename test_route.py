@@ -33,7 +33,7 @@ class TestRoute:
 		for i in range(0, len(actual.ordered_coordinates)):
 			assert actual.ordered_coordinates[i] == EXPECTED_ROUTE_2[i]
 
-	def test_getCurrentGoal(self):
+	def test_getCurrentGoalNotEmpty(self):
 		# given
 		route = Route(TEST_ACTUAL_POSITION, TEST_ROUTE)
 		
@@ -42,6 +42,19 @@ class TestRoute:
 		
 		# then
 		assert EXPECTED_ROUTE[0] == actualGoal
+
+	def test_getCurrentGoalEmpty(self):
+		# given
+		route = Route(TEST_ACTUAL_POSITION, TEST_ROUTE)
+		while len(route.ordered_coordinates) > 0:
+			route.markCurrentGoalVisited()
+		
+		
+		# when
+		actualGoal = route.getCurrentGoal()
+		
+		# then
+		assert actualGoal is None
 
 	def test_markCurrentGoalVisited(self):
 		# given

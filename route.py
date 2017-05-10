@@ -25,7 +25,10 @@ class Route:
 		return array.index(min(array))
 
 	def getCurrentGoal(self):
-		return self.ordered_coordinates[0]
+		if len(self.ordered_coordinates) > 0:
+			return self.ordered_coordinates[0]
+		else:
+			return None
 
 	def markCurrentGoalVisited(self):
 		self.ordered_coordinates = self.ordered_coordinates[1:]
