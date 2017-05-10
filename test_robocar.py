@@ -12,7 +12,7 @@ TEST_ROUTE = [Position(0.0, 0.0), Position(2.0, 0.0), Position(2.0, 2.0), Positi
 class TestRobocar:
 
 	@mock.patch('robocar.PositioningService', autospec=True)
-	def start(self, PositioningServiceMock):
+	def test_start(self, PositioningServiceMock):
 		# given
 		r = robocar.Robocar(TEST_ROUTE)
 		mockedPositions = self.mockActualPositions()
