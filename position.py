@@ -45,3 +45,12 @@ class Position:
 		beeringInRadians = math.atan2(math.sin(deltaLon) * math.cos(otherPosition.lat), math.cos(self.lat) * math.sin(otherPosition.lat) - math.sin(self.lat) * math.cos(otherPosition.lat) * math.cos(deltaLon))
 		return (math.degrees(beeringInRadians) + 360.0) % 360.0
 
+	@staticmethod
+	def positionListToStr(positions):
+		s = "["
+		for p in positions:
+			s = s + str(p) + ", "
+		if len(s) > 1:
+			s = s[:-2]
+		s = s + "]"
+		return s

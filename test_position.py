@@ -102,3 +102,13 @@ class TestPosition:
 		assert 180.0 == basePos.bearingTo(southPos)
 		assert 90.0 == basePos.bearingTo(eastPos)
 		assert 270.0 == basePos.bearingTo(westPos)
+
+	def test_positionListToStr(self):
+		# given
+		testList = [Position(1.0, 2.0), Position(3.0, 4.0)]
+		
+		# when
+		result = Position.positionListToStr(testList)
+		
+		# then
+		assert result == "[" + str(testList[0]) + ", " + str(testList[1]) + "]"
