@@ -12,7 +12,7 @@ class PositioningService:
 	@staticmethod
 	# initial values of input params need to be refined according to experience
 	def getActualPosition(numberOfSamples = 5, samplingTimeInSeconds = 1.0):
-		print "Reading GPS data for " + numberOfSamples * samplingTimeInSeconds + " seconds"
+		print "Reading GPS data for " + str(numberOfSamples * samplingTimeInSeconds) + " seconds"
 		reader = SerialReader()
 		latSum = 0.0
 		lonSum = 0.0
