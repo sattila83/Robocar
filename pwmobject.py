@@ -3,7 +3,6 @@
 import RPi.GPIO as GPIO
 import time
 
-SECONDS = 0.1 # maybe it would be better to have this as a parameter
 
 class PWMObject:
 	def __init__(self, port):
@@ -12,25 +11,25 @@ class PWMObject:
 		GPIO.setup(self.port, GPIO.OUT)
 		self.pwm = GPIO.PWM(self.port, 50) # 50 Hz (20 ms) - it would be nice to have it as a parameter
 
-	def toPositive(self):
+	def toPositive(self, length):
 		self.pwm.start(7.5)
 		for i in range(75,100):
 			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(SECONDS)
+			time.sleep(length/2.0/25.0)
 		for i in range(100,75,-1):
 			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(SECONDS)
+			time.sleep(length/2.0/25.0)
 		self.pwm.ChangeDutyCycle(7.5)
 		self.pwm.stop()
 
-	def toNegative(self):
+	def toNegative(self, length):
 		self.pwm.start(7.5)
 		for i in range(75,50,-1):
 			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(SECONDS)
+			time.sleep(length/2.0/25.0)
 		for i in range(50,75):
 			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(SECONDS)
+			time.sleep(length/2.0/25.0)
 		self.pwm.ChangeDutyCycle(7.5)
 		self.pwm.stop()
 

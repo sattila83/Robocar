@@ -3,51 +3,49 @@
 from pwmobject import PWMObject
 from random import randint
 
-class MotorFunctions:
+class MotorControl:
 
-	@staticmethod
-	def dodge():
+	def __init__(self):
+		self.drive = PWMObject(21)
+		self.turn = PWMObject(20)
+		
+	def __enter__(self):
+		return self
+
+	def __exit__(self, exc_type, exc_value, traceback):
+		self.drive.cleanup()
+		self.turn.cleanup()
+
+
+	def dodge(self):
 		print("Bypassing obstacle")
-		drive = PWMObject(21) # port 21 for driving
-		turn = PWMObject(20) # port 20 for turning
-		drive.toNegative()
+		self.drive.toNegative(2)
 		left = randint(0,1)
 		if left:
-			turn.toPositive()
+			self.turn.toPositive()
 		else:
-			turn.toNegative()
-		drive.toPositive()
+			self.turn.toNegative()
+		self.drive.toPositive(2)
 		if not left:
-			turn.toPositive()
+			self.turn.toPositive()
 		else:
-			turn.toNegative()
-		drive.cleanup()
-		turn.cleanup()
+			self.turn.toNegative()
 
-	@staticmethod
-	def moveForward():
+	def moveForward(self, length = 1):
 		print("Moving forward")
-		drive = PWMObject(21) # port 21 for driving
-		drive.toPositive()
-		drive.cleanup()
+		self.drive.toPositive(length)
 
-	@staticmethod
-	def moveBackward():
+	def moveBackward(self, length = 1):
 		print("Moving backward")
-		drive = PWMObject(21) # port 21 for driving
-		drive.toNegative()
-		drive.cleanup()
+		self.drive.toNegative(length)
 
-	@staticmethod
-	def turnLeft():
+	def turnLeft(self, length = 0.75):
 		print("Turning left")
-		turn = PWMObject(20) # port 20 for turning
-		turn.toPositive()
-		turn.cleanup()
+		self.turn.toPositive(length)
 
-	@staticmethod
-	def turnRight():
+	def turnRight(self, length = 0.75):
 		print("Turning right")
-		turn = PWMObject(20) # port 20 for turning
-		turn.toNegative()
-		turn.cleanup()
+		self.turn.toNegative(length)
+
+	
+		

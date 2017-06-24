@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-from motor import MotorFunctions
+from motor import MotorControl
 from position import Position
 from route import Route
 from positioning_service import PositioningService
@@ -17,43 +17,44 @@ class Robocar:
 		self.basePositions = positions
 	
 	def start(self):
-		print("Starting route")
-		
-		actualPosition = PositioningService.getActualPosition()
-		print("Actual position: %s" % (actualPosition))
-		route = Route(actualPosition, self.basePositions) # determine path based on actual position
-		print("Planned route: %s" % (Position.positionListToStr(route.ordered_coordinates)))
-		 
-		while not route.done(): # do until the end of the path is reached
-			MotorFunctions.moveForward()
-			previousPosition = actualPosition
+		with MotorControl() as motor:
+			print("Starting route")
+			
 			actualPosition = PositioningService.getActualPosition()
 			print("Actual position: %s" % (actualPosition))
-			
-			# check if the robot could not move in the previous iteration
-			if (actualPosition.distanceTo(previousPosition) < MIN_MOVEMENT_DISTANCE):
-				MotorFunctions.dodge() # random dodge, as the robot doesn't know its environment
-				continue
-			
-			closestVisitable = route.getCurrentGoal()
-			print("Current goal: %s" % (closestVisitable))
-			distanceToGoal = actualPosition.distanceTo(closestVisitable)
-			print("Distance to goal: %s meters" % (distanceToGoal))
-			
-			if distanceToGoal < MIN_DISTANCE_BETWEEN_POSITIONS: # actual goal is reached
-				route.markCurrentGoalVisited()
-			
-			# check if the direction is right
-			closestVisitable = route.getCurrentGoal()
-			angleDifference = Robocar.getAngleDifference(previousPosition, actualPosition, closestVisitable)
-			print("Angle difference: %s" % (angleDifference))
-			
-			# turn if refinement is needed
-			if abs(angleDifference) > MINIMUM_ANGLE:
-				if angleDifference < 0:
-					MotorFunctions.turnLeft()
-				else:
-					MotorFunctions.turnRight()
+			route = Route(actualPosition, self.basePositions) # determine path based on actual position
+			print("Planned route: %s" % (Position.positionListToStr(route.ordered_coordinates)))
+			 
+			while not route.done(): # do until the end of the path is reached
+				motor.moveForward(1)
+				previousPosition = actualPosition
+				actualPosition = PositioningService.getActualPosition()
+				print("Actual position: %s" % (actualPosition))
+				
+				# check if the robot could not move in the previous iteration
+				if (actualPosition.distanceTo(previousPosition) < MIN_MOVEMENT_DISTANCE):
+					motor.dodge() # random dodge, as the robot doesn't know its environment
+					continue
+				
+				closestVisitable = route.getCurrentGoal()
+				print("Current goal: %s" % (closestVisitable))
+				distanceToGoal = actualPosition.distanceTo(closestVisitable)
+				print("Distance to goal: %s meters" % (distanceToGoal))
+				
+				if distanceToGoal < MIN_DISTANCE_BETWEEN_POSITIONS: # actual goal is reached
+					route.markCurrentGoalVisited()
+				
+				# check if the direction is right
+				closestVisitable = route.getCurrentGoal()
+				angleDifference = Robocar.getAngleDifference(previousPosition, actualPosition, closestVisitable)
+				print("Angle difference: %s" % (angleDifference))
+				
+				# turn if refinement is needed
+				if abs(angleDifference) > MINIMUM_ANGLE:
+					if angleDifference < 0:
+						motor.turnLeft()
+					else:
+						motor.turnRight()
 		print("Finished route")
 
 	@staticmethod
