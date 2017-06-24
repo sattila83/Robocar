@@ -2,7 +2,7 @@
 
 import mock
 
-import motor
+from motor import MotorControl
 
 class TestMotorControl:
 
