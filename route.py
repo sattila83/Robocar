@@ -16,8 +16,6 @@ class Route:
 			self.ordered_coordinates = self.ordered_coordinates[1:]
 			self.ordered_coordinates.append(firstToLast)
 			
-		# add actual position as last position to complete route
-		self.ordered_coordinates.append(actual_position)
 
 	@staticmethod
 	def _argmin(array):

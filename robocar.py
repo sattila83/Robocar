@@ -26,15 +26,18 @@ class Robocar:
 			print("Planned route: %s" % (Position.positionListToStr(route.ordered_coordinates)))
 			 
 			while not route.done(): # do until the end of the path is reached
-				motor.moveForward(1)
+				motor.moveForward(2)
 				previousPosition = actualPosition
 				actualPosition = PositioningService.getActualPosition()
 				print("Actual position: %s" % (actualPosition))
-				
+				if actualPosition.isNull():
+					print 'No GPS'
+					break				
+
 				# check if the robot could not move in the previous iteration
-				if (actualPosition.distanceTo(previousPosition) < MIN_MOVEMENT_DISTANCE):
-					motor.dodge() # random dodge, as the robot doesn't know its environment
-					continue
+				#if (actualPosition.distanceTo(previousPosition) < MIN_MOVEMENT_DISTANCE):
+				#	motor.dodge() # random dodge, as the robot doesn't know its environment
+				#	continue
 				
 				closestVisitable = route.getCurrentGoal()
 				print("Current goal: %s" % (closestVisitable))
@@ -52,9 +55,9 @@ class Robocar:
 				# turn if refinement is needed
 				if abs(angleDifference) > MINIMUM_ANGLE:
 					if angleDifference < 0:
-						motor.turnLeft()
+						motor.turnLeft(0.5)
 					else:
-						motor.turnRight()
+						motor.turnRight(0.5)
 		print("Finished route")
 
 	@staticmethod

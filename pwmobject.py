@@ -10,29 +10,32 @@ class PWMObject:
 		GPIO.setmode(GPIO.BCM)
 		GPIO.setup(self.port, GPIO.OUT)
 		self.pwm = GPIO.PWM(self.port, 50) # 50 Hz (20 ms) - it would be nice to have it as a parameter
+		self.pwm.start(7.5)
 
 	def toPositive(self, length = 1):
-		self.pwm.start(7.5)
-		for i in range(75,100):
-			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(length/2.0/25.0)
-		for i in range(100,75,-1):
-			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(length/2.0/25.0)
+		#self.pwm.start(7.5)
+		#for i in range(75,100):
+		self.pwm.ChangeDutyCycle(10.0)
+		time.sleep(length)
+		#	time.sleep(length/2.0/25.0)
+		#for i in range(100,75,-1):
+		#	self.pwm.ChangeDutyCycle(i/10.0)
+		#	time.sleep(length/2.0/25.0)
 		self.pwm.ChangeDutyCycle(7.5)
-		self.pwm.stop()
+		#self.pwm.stop()
 
 	def toNegative(self, length = 1):
-		self.pwm.start(7.5)
-		for i in range(75,50,-1):
-			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(length/2.0/25.0)
-		for i in range(50,75):
-			self.pwm.ChangeDutyCycle(i/10.0)
-			time.sleep(length/2.0/25.0)
+		#self.pwm.start(7.5)
+		#for i in range(75,50,-1):
+		self.pwm.ChangeDutyCycle(5.0)
+		time.sleep(length)
+		#for i in range(50,75):
+		#	self.pwm.ChangeDutyCycle(i/10.0)
+		#	time.sleep(length/2.0/25.0)
 		self.pwm.ChangeDutyCycle(7.5)
-		self.pwm.stop()
+		#self.pwm.stop()
 
 	def cleanup(self):
+		self.pwm.stop()
 		GPIO.cleanup()
 
