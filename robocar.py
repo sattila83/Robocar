@@ -6,7 +6,7 @@ from route import Route
 from positioning_service import PositioningService
 
 # constants need to be refined according to experience
-MIN_DISTANCE_BETWEEN_POSITIONS = 2
+MIN_DISTANCE_BETWEEN_POSITIONS = 4    #07.05
 MAX_DISTANCE_BETWEEN_POSITIONS = 10
 MIN_MOVEMENT_DISTANCE = 1
 MINIMUM_ANGLE = 30
@@ -26,7 +26,7 @@ class Robocar:
 			print("Planned route: %s" % (Position.positionListToStr(route.ordered_coordinates)))
 			 
 			while not route.done(): # do until the end of the path is reached
-				motor.moveForward(2)
+				motor.moveForward(3) #07.05
 				previousPosition = actualPosition
 				actualPosition = PositioningService.getActualPosition()
 				print("Actual position: %s" % (actualPosition))
